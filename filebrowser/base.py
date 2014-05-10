@@ -466,7 +466,7 @@ class FileObject():
         "Get the filename of an original image from a version"
         tmp = self.filename_root.split("_")
         if tmp[len(tmp)-1] in VERSIONS:
-            return u"%s%s" % (self.filename_root.replace("_%s" % tmp[len(tmp)-1], ""), self.extension)
+            return "%s%s" % (self.filename_root.replace("_%s" % tmp[len(tmp)-1], ""), self.extension)
         return self.filename
 
     # VERSION METHODS

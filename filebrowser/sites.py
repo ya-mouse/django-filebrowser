@@ -298,7 +298,7 @@ class FileBrowserSite(object):
             return True
 
         query = request.GET.copy()
-        path = u'%s' % os.path.join(self.directory, query.get('dir', ''))
+        path = '%s' % os.path.join(self.directory, query.get('dir', ''))
 
         filelisting = FileListing(
             path,
@@ -348,7 +348,7 @@ class FileBrowserSite(object):
             'page': page,
             'filelisting': filelisting,
             'query': query,
-            'title': _(u'FileBrowser'),
+            'title': _('FileBrowser'),
             'settings_var': get_settings_var(directory=self.directory),
             'breadcrumbs': get_breadcrumbs(query, query.get('dir', '')),
             'breadcrumbs_title': "",
@@ -359,7 +359,7 @@ class FileBrowserSite(object):
         "Create Directory"
         from filebrowser.forms import CreateDirForm
         query = request.GET
-        path = u'%s' % os.path.join(self.directory, query.get('dir', ''))
+        path = '%s' % os.path.join(self.directory, query.get('dir', ''))
 
         if request.method == 'POST':
             form = CreateDirForm(path, request.POST, filebrowser_site=self)
@@ -384,10 +384,10 @@ class FileBrowserSite(object):
         return render_to_response('filebrowser/createdir.html', {
             'form': form,
             'query': query,
-            'title': _(u'New Folder'),
+            'title': _('New Folder'),
             'settings_var': get_settings_var(directory=self.directory),
             'breadcrumbs': get_breadcrumbs(query, query.get('dir', '')),
-            'breadcrumbs_title': _(u'New Folder'),
+            'breadcrumbs_title': _('New Folder'),
             'filebrowser_site': self
         }, context_instance=Context(request, current_app=self.name))
 
@@ -397,17 +397,17 @@ class FileBrowserSite(object):
 
         return render_to_response('filebrowser/upload.html', {
             'query': query,
-            'title': _(u'Select files to upload'),
+            'title': _('Select files to upload'),
             'settings_var': get_settings_var(directory=self.directory),
             'breadcrumbs': get_breadcrumbs(query, query.get('dir', '')),
-            'breadcrumbs_title': _(u'Upload'),
+            'breadcrumbs_title': _('Upload'),
             'filebrowser_site': self
         }, context_instance=Context(request, current_app=self.name))
 
     def delete_confirm(self, request):
         "Delete existing File/Directory."
         query = request.GET
-        path = u'%s' % os.path.join(self.directory, query.get('dir', ''))
+        path = '%s' % os.path.join(self.directory, query.get('dir', ''))
         fileobject = FileObject(os.path.join(path, query.get('filename', '')), site=self)
         if fileobject.filetype == "Folder":
             filelisting = FileListing(
@@ -430,17 +430,17 @@ class FileBrowserSite(object):
             'filelisting': filelisting,
             'additional_files': additional_files,
             'query': query,
-            'title': _(u'Confirm delete'),
+            'title': _('Confirm delete'),
             'settings_var': get_settings_var(directory=self.directory),
             'breadcrumbs': get_breadcrumbs(query, query.get('dir', '')),
-            'breadcrumbs_title': _(u'Confirm delete'),
+            'breadcrumbs_title': _('Confirm delete'),
             'filebrowser_site': self
         }, context_instance=Context(request, current_app=self.name))
 
     def delete(self, request):
         "Delete existing File/Directory."
         query = request.GET
-        path = u'%s' % os.path.join(self.directory, query.get('dir', ''))
+        path = '%s' % os.path.join(self.directory, query.get('dir', ''))
         fileobject = FileObject(os.path.join(path, query.get('filename', '')), site=self)
 
         if request.GET:
@@ -463,7 +463,7 @@ class FileBrowserSite(object):
         """
         from filebrowser.forms import ChangeForm
         query = request.GET
-        path = u'%s' % os.path.join(self.directory, query.get('dir', ''))
+        path = '%s' % os.path.join(self.directory, query.get('dir', ''))
         fileobject = FileObject(os.path.join(path, query.get('filename', '')), site=self)
 
         if request.method == 'POST':
@@ -503,10 +503,10 @@ class FileBrowserSite(object):
             'form': form,
             'fileobject': fileobject,
             'query': query,
-            'title': u'%s' % fileobject.filename,
+            'title': '%s' % fileobject.filename,
             'settings_var': get_settings_var(directory=self.directory),
             'breadcrumbs': get_breadcrumbs(query, query.get('dir', '')),
-            'breadcrumbs_title': u'%s' % fileobject.filename,
+            'breadcrumbs_title': '%s' % fileobject.filename,
             'filebrowser_site': self
         }, context_instance=Context(request, current_app=self.name))
 
@@ -516,7 +516,7 @@ class FileBrowserSite(object):
         This just exists in order to select a version with a filebrowser–popup.
         """
         query = request.GET
-        path = u'%s' % os.path.join(self.directory, query.get('dir', ''))
+        path = '%s' % os.path.join(self.directory, query.get('dir', ''))
         fileobject = FileObject(os.path.join(path, query.get('filename', '')), site=self)
 
         return render_to_response('filebrowser/version.html', {

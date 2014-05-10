@@ -163,7 +163,7 @@ def test_overwrite(test):
         response = test.c.post(url, data={'qqfile': 'testimage.jpg', 'file': f}, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
     # Check files
-    test.assertEqual(test.site.storage.listdir(test.tmpdir), ([], [u'testimage.jpg']))
+    test.assertEqual(test.site.storage.listdir(test.tmpdir), ([], ['testimage.jpg']))
 
     # OVERWRITE false
     filebrowser.sites.OVERWRITE_EXISTING = False
@@ -176,7 +176,7 @@ def test_overwrite(test):
         response = test.c.post(url, data={'qqfile': 'testimage.jpg', 'file': f}, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
     # Check files
-    test.assertEqual(sorted(test.site.storage.listdir(test.tmpdir)[1]), [u'testimage.jpg', u'testimage_1.jpg'])
+    test.assertEqual(sorted(test.site.storage.listdir(test.tmpdir)[1]), ['testimage.jpg', 'testimage_1.jpg'])
 
     # Reset settings
     filebrowser.sites.OVERWRITE_EXISTING = oe
@@ -189,7 +189,7 @@ def test_convert_normalize(test):
 
     url = reverse('%s:fb_do_upload' % test.site_name)
     url = '?'.join([url, urlencode({'folder': test.tmpdir.path_relative_directory, 'qqfile': 'TEST IMAGE 000.jpg'})])
-    f = open(os.path.join(FILEBROWSER_PATH, u'static/filebrowser/img/TEST IMAGE 000.jpg'), "rb")
+    f = open(os.path.join(FILEBROWSER_PATH, 'static/filebrowser/img/TEST IMAGE 000.jpg'), "rb")
 
     # Save settings
     oe = filebrowser.sites.OVERWRITE_EXISTING
@@ -204,7 +204,7 @@ def test_convert_normalize(test):
     response = test.c.post(url, data={'qqfile': 'TEST IMAGE 000.jpg', 'file': f}, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
     path = os.path.join(test.tmpdir.path, 'TEST IMAGE 000.jpg')
     test.assertTrue(test.site.storage.exists(path))
-    test.assertEqual(sorted(test.site.storage.listdir(test.tmpdir)[1]), [u'TEST IMAGE 000.jpg', u'testimage.jpg', u'testimage_1.jpg'])
+    test.assertEqual(sorted(test.site.storage.listdir(test.tmpdir)[1]), ['TEST IMAGE 000.jpg', 'testimage.jpg', 'testimage_1.jpg'])
 
     # OVERWRITE true
     filebrowser.sites.OVERWRITE_EXISTING = True
@@ -213,7 +213,7 @@ def test_convert_normalize(test):
     test.assertTrue(test.site.storage.exists(path))
     path = os.path.join(test.tmpdir.path, 'TEST IMAGE 000_1.jpg')
     test.assertFalse(test.site.storage.exists(path))
-    test.assertEqual(sorted(test.site.storage.listdir(test.tmpdir)[1]), [u'TEST IMAGE 000.jpg', u'testimage.jpg', u'testimage_1.jpg'])
+    test.assertEqual(sorted(test.site.storage.listdir(test.tmpdir)[1]), ['TEST IMAGE 000.jpg', 'testimage.jpg', 'testimage_1.jpg'])
 
     # OVERWRITE false
     filebrowser.sites.OVERWRITE_EXISTING = False
@@ -222,7 +222,7 @@ def test_convert_normalize(test):
     test.assertTrue(test.site.storage.exists(path))
     path = os.path.join(test.tmpdir.path, 'TEST IMAGE 000_1.jpg')
     test.assertTrue(test.site.storage.exists(path))
-    test.assertEqual(sorted(test.site.storage.listdir(test.tmpdir)[1]), [u'TEST IMAGE 000.jpg', u'TEST IMAGE 000_1.jpg', u'testimage.jpg', u'testimage_1.jpg'])
+    test.assertEqual(sorted(test.site.storage.listdir(test.tmpdir)[1]), ['TEST IMAGE 000.jpg', 'TEST IMAGE 000_1.jpg', 'testimage.jpg', 'testimage_1.jpg'])
 
     # Set CONVERT_FILENAME, NORMALIZE_FILENAME
     filebrowser.sites.CONVERT_FILENAME = True
@@ -232,7 +232,7 @@ def test_convert_normalize(test):
     response = test.c.post(url, data={'qqfile': 'TEST IMAGE 000.jpg', 'file': f}, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
     path = os.path.join(test.tmpdir.path, 'test_image_000.jpg')
     test.assertTrue(test.site.storage.exists(path))
-    test.assertEqual(sorted(test.site.storage.listdir(test.tmpdir)[1]), [u'TEST IMAGE 000.jpg', u'TEST IMAGE 000_1.jpg', u'test_image_000.jpg', u'testimage.jpg', u'testimage_1.jpg'])
+    test.assertEqual(sorted(test.site.storage.listdir(test.tmpdir)[1]), ['TEST IMAGE 000.jpg', 'TEST IMAGE 000_1.jpg', 'test_image_000.jpg', 'testimage.jpg', 'testimage_1.jpg'])
 
     # OVERWRITE true
     filebrowser.sites.OVERWRITE_EXISTING = True
@@ -241,7 +241,7 @@ def test_convert_normalize(test):
     test.assertTrue(test.site.storage.exists(path))
     path = os.path.join(test.tmpdir.path, 'test_image_000_1.jpg')
     test.assertFalse(test.site.storage.exists(path))
-    test.assertEqual(sorted(test.site.storage.listdir(test.tmpdir)[1]), [u'TEST IMAGE 000.jpg', u'TEST IMAGE 000_1.jpg', u'test_image_000.jpg', u'testimage.jpg', u'testimage_1.jpg'])
+    test.assertEqual(sorted(test.site.storage.listdir(test.tmpdir)[1]), ['TEST IMAGE 000.jpg', 'TEST IMAGE 000_1.jpg', 'test_image_000.jpg', 'testimage.jpg', 'testimage_1.jpg'])
 
     # OVERWRITE false
     filebrowser.sites.OVERWRITE_EXISTING = False
@@ -250,7 +250,7 @@ def test_convert_normalize(test):
     test.assertTrue(test.site.storage.exists(path))
     path = os.path.join(test.tmpdir.path, 'test_image_000_1.jpg')
     test.assertTrue(test.site.storage.exists(path))
-    test.assertEqual(sorted(test.site.storage.listdir(test.tmpdir)[1]), [u'TEST IMAGE 000.jpg', u'TEST IMAGE 000_1.jpg', u'test_image_000.jpg', u'test_image_000_1.jpg', u'testimage.jpg', u'testimage_1.jpg'])
+    test.assertEqual(sorted(test.site.storage.listdir(test.tmpdir)[1]), ['TEST IMAGE 000.jpg', 'TEST IMAGE 000_1.jpg', 'test_image_000.jpg', 'test_image_000_1.jpg', 'testimage.jpg', 'testimage_1.jpg'])
 
     # Set CONVERT_FILENAME, NORMALIZE_FILENAME
     filebrowser.sites.CONVERT_FILENAME = True
@@ -260,7 +260,7 @@ def test_convert_normalize(test):
     response = test.c.post(url, data={'qqfile': 'TEST IMAGE 000.jpg', 'file': f}, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
     path = os.path.join(test.tmpdir.path, 'test_image_000.jpg')
     test.assertTrue(test.site.storage.exists(path))
-    test.assertEqual(sorted(test.site.storage.listdir(test.tmpdir)[1]), [u'TEST IMAGE 000.jpg', u'TEST IMAGE 000_1.jpg', u'test_image_000.jpg', u'test_image_000_1.jpg', u'test_image_000_2.jpg', u'testimage.jpg', u'testimage_1.jpg'])
+    test.assertEqual(sorted(test.site.storage.listdir(test.tmpdir)[1]), ['TEST IMAGE 000.jpg', 'TEST IMAGE 000_1.jpg', 'test_image_000.jpg', 'test_image_000_1.jpg', 'test_image_000_2.jpg', 'testimage.jpg', 'testimage_1.jpg'])
 
     # OVERWRITE true
     filebrowser.sites.OVERWRITE_EXISTING = True
@@ -273,7 +273,7 @@ def test_convert_normalize(test):
     test.assertTrue(test.site.storage.exists(path))
     path = os.path.join(test.tmpdir.path, 'test_image_000_3.jpg')
     test.assertFalse(test.site.storage.exists(path))
-    test.assertEqual(sorted(test.site.storage.listdir(test.tmpdir)[1]), [u'TEST IMAGE 000.jpg', u'TEST IMAGE 000_1.jpg', u'test_image_000.jpg', u'test_image_000_1.jpg', u'test_image_000_2.jpg', u'testimage.jpg', u'testimage_1.jpg'])
+    test.assertEqual(sorted(test.site.storage.listdir(test.tmpdir)[1]), ['TEST IMAGE 000.jpg', 'TEST IMAGE 000_1.jpg', 'test_image_000.jpg', 'test_image_000_1.jpg', 'test_image_000_2.jpg', 'testimage.jpg', 'testimage_1.jpg'])
 
     # OVERWRITE false
     filebrowser.sites.OVERWRITE_EXISTING = False
@@ -286,7 +286,7 @@ def test_convert_normalize(test):
     test.assertTrue(test.site.storage.exists(path))
     path = os.path.join(test.tmpdir.path, 'test_image_000_3.jpg')
     test.assertTrue(test.site.storage.exists(path))
-    test.assertEqual(sorted(test.site.storage.listdir(test.tmpdir)[1]), [u'TEST IMAGE 000.jpg', u'TEST IMAGE 000_1.jpg', u'test_image_000.jpg', u'test_image_000_1.jpg', u'test_image_000_2.jpg', u'test_image_000_3.jpg', u'testimage.jpg', u'testimage_1.jpg'])
+    test.assertEqual(sorted(test.site.storage.listdir(test.tmpdir)[1]), ['TEST IMAGE 000.jpg', 'TEST IMAGE 000_1.jpg', 'test_image_000.jpg', 'test_image_000_1.jpg', 'test_image_000_2.jpg', 'test_image_000_3.jpg', 'testimage.jpg', 'testimage_1.jpg'])
 
     # Reset settings
     filebrowser.sites.CONVERT_FILENAME = cf
